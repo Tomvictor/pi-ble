@@ -27,11 +27,11 @@ noble.on('discover', function(peripheral) {
     console.log('connected to peripheral (ID): ' + peripheral.address);
     console.log('reading started');
 
-        peripheral.discoverServices(['1110'], function(error, services) {
+        peripheral.discoverServices(['180a'], function(error, services) {
       var LedService = services[0];
       console.log('discovered LedService service');
 
-      LedService.discoverCharacteristics(['1111'], function(error, characteristics) {
+      LedService.discoverCharacteristics(['2a29'], function(error, characteristics) {
         var LedCharacteristic = characteristics[0];
         console.log('discovered  Led characteristic');
 
