@@ -18,11 +18,11 @@ noble.on('stateChange', function(state) {
 noble.on('discover', function(peripheral) {
   peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral.uuid);
-    peripheral.discoverServices(['180f'], function(error, services) {
+    peripheral.discoverServices(['1110'], function(error, services) {
       var deviceInformationService = services[0];
       console.log('discovered device information service');
 
-      deviceInformationService.discoverCharacteristics(['2a19'], function(error, characteristics) {
+      deviceInformationService.discoverCharacteristics(['1111'], function(error, characteristics) {
         var manufacturerNameCharacteristic = characteristics[0];
         console.log('discovered manufacturer name characteristic');
 
