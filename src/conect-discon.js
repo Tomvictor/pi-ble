@@ -24,7 +24,7 @@ noble.on('discover', function(peripheral) {
 
     peripheral.connect(function(error) {
     console.log('connected to peripheral: ' + peripheral.uuid);
-    console.log('connected to peripheral (ID): ' + peripheral.id);
+    console.log('connected to peripheral (ID): ' + peripheral.address);
 
     peripheral.disconnect(function(error) {
     console.log('disconnected from peripheral: ' + peripheral.uuid);
