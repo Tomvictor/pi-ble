@@ -1,19 +1,35 @@
 var async = require('async');
 var noble = require('noble');
+var mqtt = require('mqtt');
+var options = {
+    port: 8883
+};
+var client = mqtt.connect('mqtt://technoripio.cloudapp.net', options);
+
+client.on('connect', function () {
+   // client.subscribe('beacon');
+    client.subscribe('tracker');
+    client.publish('beacon', 'rasperry pi beacon switched on');
+});
+
 
 //var peripheralIdOrAddress = process.argv[2].toLowerCase();
 var peripheralIdOrAddress = "b0:b4:48:d0:b4:03"
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
-    noble.startScanning();
+      noble.startScanning();
+      client.publish('beacon', 'power on so scaning started');
   } else {
     noble.stopScanning();
   }
 });
 
 noble.on('discover', function(peripheral) {
+    client.publish('beacon', 'on discover event');
   if (peripheral.id === peripheralIdOrAddress || peripheral.address === peripheralIdOrAddress) {
-    noble.stopScanning();
+      noble.stopScanning();
+      client.publish('beacon', 'find the given peripheral');
+      client.publish('beacon', peripheral.id);
 
     console.log('peripheral with ID ' + peripheral.id + ' found');
     var advertisement = peripheral.advertisement;
