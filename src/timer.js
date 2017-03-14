@@ -10,7 +10,7 @@ var client = mqtt.connect('mqtt://technoripio.cloudapp.net', options);
 
 client.on('connect', function () {
     client.subscribe('tracker')
-    client.publish('log/beacon', 'Hello mqtt')
+    client.publish('log/beacon', 'testing timer on pi')
 })
 
 
@@ -31,7 +31,16 @@ client.on('message', function (topic, message) {
 
 console.log("Code started");
 
+var mqfn = function(msg){
+    client.publish('log/beacon','Pi counter : '+msg);
+};
+
+var counti = 1;
+
 setInterval(function() {
     //isLedOn = !isLedOn;
+    counti++;
     console.log("timer event");
+    mqfn(counti);
 }, configTimeout);
+
