@@ -12,13 +12,6 @@ var arrayCount = 0 ;
 //arrayCount++ ;
 
 
-noble.on('stateChange', function(state) {
-  if (state === 'poweredOn') {
-    noble.startScanning();
-  } else {
-    noble.stopScanning();
-  }
-});
 
 noble.on('discover', function(peripheral) {
   console.log('found a device');
@@ -44,6 +37,7 @@ noble.on('discover', function(peripheral) {
 
 //timer code starts here
 var i=0;
+var myBleCount = 0;
 setInterval(function(){
     console.log('Timer event '+count);
     client.publish('pi', 'Timer Event '+count);
@@ -57,13 +51,22 @@ setInterval(function(){
     {
 	boolFlag = 1 ;
 	noble.stopScanning();
-	for (i = 0; i < mainObject.length; i++) {
+	for (i = 0; i < mainObject.length; i++)
+	{
 	    var obj = mainObject[i];
-	    if(peripheral.id == 'cc78ab87b181')
+	    if(obj == 'cc78ab87b181')
 	    {
-		console.log('kranioz ble found');
+		console.log('kranioz ble found int the scan results, timer');
+		myBleCount++ ;
 	    }
 	}
+
+	if(myBleCount)
+	{
+	    //if myBleCount > 0 the device presense, else not out of range
+	    console.log('ble found count greater than 0');
+	}
+	myBleCount = 0 ;
     }
     count++ ;
 }, 10000);
