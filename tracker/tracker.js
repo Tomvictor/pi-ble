@@ -65,9 +65,9 @@ setInterval(function(){
 	    {
 		console.log('kranioz Ble Device Found in the scan results, In Range');
 		client.publish('idrange', 'In Range');
-		baseUrl+= 'range=1' ;
+		//baseUrl+= 'range=1' ;
 		console.log(baseUrl);
-		request(baseUrl, function (error, response, body) {
+		request(baseUrl+'range=1', function (error, response, body) {
 		    console.log('error:', error); // Print the error if one occurred
 		    console.log('statusCode:', response && response.statusCode); // Print the response
 		    console.log('body:', body); // Print the HTML for the Google homepage.
@@ -78,8 +78,8 @@ setInterval(function(){
 	    {
 		client.publish('idrange', 'Out of Range');
 		console.log('Kranioz Ble Device, Not fount, Out of range');
-		baseUrl += 'range=0' ;
-		console.log(baseUrl);
+		//baseUrl += 'range=0' ;
+		console.log(baseUrl+'range=0');
 		request(baseUrl, function (error, response, body) {
 		    console.log('error:', error); // Print the error if one occurred
 		    console.log('statusCode:', response && response.statusCode); // Print the response
