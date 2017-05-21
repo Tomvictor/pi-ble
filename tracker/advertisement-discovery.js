@@ -1,4 +1,7 @@
 var noble = require('noble');
+var mqtt = require('mqtt')
+var client  = mqtt.connect('mqtt://technoripio.cloudapp.net:8883')
+
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
@@ -9,7 +12,7 @@ noble.on('stateChange', function(state) {
 });
 
 noble.on('discover', function(peripheral) {
-    console.log('found a device');
+  console.log('found a device');
   console.log('peripheral discovered (' + peripheral.id +
               ' with address <' + peripheral.address +  ', ' + peripheral.addressType + '>,' +
               ' connectable ' + peripheral.connectable + ',' +
