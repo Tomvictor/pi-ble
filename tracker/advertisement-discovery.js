@@ -24,7 +24,7 @@ noble.on('discover', function(peripheral) {
   console.log('\tcan I interest you in any of the following advertised services:');
   console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
 
-    if(peripheral.id == 'myDeviceId')
+    if(peripheral.id == myDeviceId)
     {
 	console.log('kranioz ble found');
     }
@@ -58,7 +58,7 @@ setInterval(function(){
 	{
 	    var obj = mainObject[i];
 	    console.log(obj);
-	    if(obj == 'myDeviceId')
+	    if(obj == myDeviceId)
 	    {
 		console.log('kranioz ble found int the scan results, timer');
 		myBleCount++ ;
