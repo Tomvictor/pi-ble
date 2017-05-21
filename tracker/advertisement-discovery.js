@@ -29,3 +29,22 @@ noble.on('discover', function(peripheral) {
   console.log();
 }); 
 
+var count = 0 ;
+var boolFlag = 1 ;
+
+setInterval(function(){
+    console.log('Timer event '+count);
+    client.publish('pi', 'Timer Event '+count);
+
+    if(boolFlag == 1)
+    {
+	boolFlag = 0 ;
+	noble.startScanning();
+    }
+    else
+    {
+	boolFlag = 1 ;
+	noble.stopScanning();
+    }
+    count++ ;
+}, 10000);
