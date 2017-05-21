@@ -33,12 +33,15 @@ noble.on('discover', function(peripheral) {
     mainObject[arrayCount] = peripheral.id ;
     //incrimenting the object key by once
     arrayCount++ ;
+    console.log(mainObject[arrayCount]);
+    console.log(arrayCount);
 }); 
 
 //timer code starts here
 var i=0;
 var myBleCount = 0;
 setInterval(function(){
+    arrayCount = 0 ;
     console.log('Timer event '+count);
     client.publish('pi', 'Timer Event '+count);
 
@@ -51,9 +54,10 @@ setInterval(function(){
     {
 	boolFlag = 1 ;
 	noble.stopScanning();
-	for (i = 0; i < mainObject.length; i++)
+	for (i = 0; i <= arrayCount; i++)
 	{
 	    var obj = mainObject[i];
+	    console.log(obj);
 	    if(obj == 'cc78ab87b181')
 	    {
 		console.log('kranioz ble found int the scan results, timer');
