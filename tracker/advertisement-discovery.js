@@ -1,7 +1,7 @@
 var noble = require('noble');
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://technoripio.cloudapp.net:8883')
-
+var myDeviceId = 'cc78ab87b181'
 var count = 0 ;
 var boolFlag = 1 ;
 
@@ -24,7 +24,7 @@ noble.on('discover', function(peripheral) {
   console.log('\tcan I interest you in any of the following advertised services:');
   console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
 
-    if(peripheral.id == 'cc78ab87b181')
+    if(peripheral.id == 'myDeviceId')
     {
 	console.log('kranioz ble found');
     }
@@ -58,10 +58,14 @@ setInterval(function(){
 	{
 	    var obj = mainObject[i];
 	    console.log(obj);
-	    if(obj == 'cc78ab87b181')
+	    if(obj == 'myDeviceId')
 	    {
 		console.log('kranioz ble found int the scan results, timer');
 		myBleCount++ ;
+	    }
+	    else
+	    {
+		console.log('Kranioz ble not fount, so out of range');
 	    }
 	}
 
@@ -73,4 +77,4 @@ setInterval(function(){
 	myBleCount = 0 ;
     }
     count++ ;
-}, 10000);
+}, 7000);
