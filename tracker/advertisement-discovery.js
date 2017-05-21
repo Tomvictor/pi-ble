@@ -14,19 +14,18 @@ var arrayCount = 0 ;
 
 
 noble.on('discover', function(peripheral) {
-  console.log('found a device');
+  console.log('Found a device');
   console.log('peripheral discovered (' + peripheral.id +
               ' with address <' + peripheral.address +  ', ' + peripheral.addressType + '>,' +
               ' connectable ' + peripheral.connectable + ',' +
               ' RSSI ' + peripheral.rssi + ':');
-  console.log('\thello my local name is:');
+  console.log('\tlocal name is:');
   console.log('\t\t' + peripheral.advertisement.localName);
-  console.log('\tcan I interest you in any of the following advertised services:');
   console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
 
     if(peripheral.id == myDeviceId)
     {
-	console.log('kranioz ble found');
+	console.log('kranioz Ble Device found');
     }
     console.log();
     //storing the current device to json object
@@ -43,7 +42,7 @@ var myBleCount = 0;
 setInterval(function(){
     arrayCount = 0 ;
     console.log('Timer event '+count);
-    client.publish('pi', 'Timer Event '+count);
+    client.publish('idcard', 'Timer Event '+count);
 
     if(boolFlag == 1)
     {
@@ -60,12 +59,12 @@ setInterval(function(){
 	    console.log(obj);
 	    if(obj == myDeviceId)
 	    {
-		console.log('kranioz ble found int the scan results, timer');
+		console.log('kranioz Ble Device Found in the scan results, In Range');
 		myBleCount++ ;
 	    }
 	    else
 	    {
-		console.log('Kranioz ble not fount, so out of range');
+		console.log('Kranioz Ble Device, Not fount, Out of range');
 	    }
 	}
 
