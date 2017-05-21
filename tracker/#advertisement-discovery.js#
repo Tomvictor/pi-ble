@@ -18,11 +18,7 @@ noble.on('discover', function(peripheral) {
   console.log('\t\t' + peripheral.advertisement.localName);
   console.log('\tcan I interest you in any of the following advertised services:');
   console.log('\t\t' + JSON.stringify(peripheral.advertisement.serviceUuids));
-
-    if(peripheral.id == 'cc78ab87b181')
-    {
-	console.log('kranioz ble found');
-    }
+    if (peripheral.id == 'peripheral discovered (cc78ab87b181 with address <cc:78:ab:87:b1:81, public>, connectable true, RSSI -51:')
   console.log();
-}); 
+});
 
