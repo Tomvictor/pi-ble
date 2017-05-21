@@ -2,6 +2,15 @@ var noble = require('noble');
 var mqtt = require('mqtt')
 var client  = mqtt.connect('mqtt://technoripio.cloudapp.net:8883')
 
+var count = 0 ;
+var boolFlag = 1 ;
+
+var mainObject = {};// empty Object
+var arrayCount = 0 ;
+//mainObject[arrayCount] = peripheralId; 
+
+//arrayCount++ ;
+
 
 noble.on('stateChange', function(state) {
   if (state === 'poweredOn') {
@@ -26,12 +35,15 @@ noble.on('discover', function(peripheral) {
     {
 	console.log('kranioz ble found');
     }
-  console.log();
+    console.log();
+    //storing the current device to json object
+    mainObject[arrayCount] = peripheral.id ;
+    //incrimenting the object key by once
+    arrayCount++ ;
 }); 
 
-var count = 0 ;
-var boolFlag = 1 ;
-
+//timer code starts here
+var i=0;
 setInterval(function(){
     console.log('Timer event '+count);
     client.publish('pi', 'Timer Event '+count);
@@ -45,6 +57,13 @@ setInterval(function(){
     {
 	boolFlag = 1 ;
 	noble.stopScanning();
+	for (i = 0; i < mainObject.length; i++) {
+	    var obj = mainObject[i];
+	    if(peripheral.id == 'cc78ab87b181')
+	    {
+		console.log('kranioz ble found');
+	    }
+	}
     }
     count++ ;
 }, 10000);
