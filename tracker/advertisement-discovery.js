@@ -60,10 +60,12 @@ setInterval(function(){
 	    if(obj == myDeviceId)
 	    {
 		console.log('kranioz Ble Device Found in the scan results, In Range');
+		client.publish('idRange', 'In Range');
 		myBleCount++ ;
 	    }
 	    else
 	    {
+		client.publish('idRange', 'Out of Range');
 		console.log('Kranioz Ble Device, Not fount, Out of range');
 	    }
 	}
