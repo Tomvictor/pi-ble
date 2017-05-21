@@ -1,5 +1,9 @@
 var noble = require('noble');
 var mqtt = require('mqtt')
+//Request code
+var request = require('request');
+var baseUrl = 'http://kranioz.com/ble?' ;
+//mqtt import
 var client  = mqtt.connect('mqtt://technoripio.cloudapp.net:8883')
 var myDeviceId = 'cc78ab87b181'
 var count = 0 ;
@@ -61,12 +65,26 @@ setInterval(function(){
 	    {
 		console.log('kranioz Ble Device Found in the scan results, In Range');
 		client.publish('idrange', 'In Range');
+		baseUrl+= 'range=1' ;
+		console.log(baseUrl);
+		request(baseUrl, function (error, response, body) {
+		    console.log('error:', error); // Print the error if one occurred
+		    console.log('statusCode:', response && response.statusCode); // Print the response
+		    console.log('body:', body); // Print the HTML for the Google homepage.
+		});
 		myBleCount++ ;
 	    }
 	    else
 	    {
 		client.publish('idrange', 'Out of Range');
 		console.log('Kranioz Ble Device, Not fount, Out of range');
+		baseUrl += 'range=0' ;
+		console.log(baseUrl);
+		request(baseUrl, function (error, response, body) {
+		    console.log('error:', error); // Print the error if one occurred
+		    console.log('statusCode:', response && response.statusCode); // Print the response
+		    console.log('body:', body); // Print the HTML for the Google homepage.
+		});
 	    }
 	}
 
