@@ -5,7 +5,7 @@ var request = require('request');
 var baseUrl = 'http://kranioz.com/ble?' ;
 //mqtt import
 var client  = mqtt.connect('mqtt://technoripio.cloudapp.net:8883')
-var myDeviceId = 'cc78ab87b181'
+var myDeviceId = 'b0b448c36707'
 var count = 0 ;
 var boolFlag = 1 ;
 
